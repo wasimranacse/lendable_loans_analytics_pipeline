@@ -13,6 +13,7 @@ The goal was to showcase an end-to-end modern data pipeline using:
 ## Project Structure
 
 models/
+
     staging/ --> stg_ models (raw data cleaned & standardized)
 
     intermediate/ --> int_ models (business logic & aggregations)
