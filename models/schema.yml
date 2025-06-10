@@ -6,24 +6,34 @@ models:
     columns:
       - name: customer_id
         description: "Unique identifier for each customer."
+        tests:
+          - unique
+          - not_null
       - name: first_name
         description: "First name of the customer."
       - name: last_name
         description: "Last name of the customer."
       - name: dob
         description: "Date of birth."
+        tests:
+          - not_null
       - name: signup_date
         description: "Date when the customer signed up."
       - name: address
         description: "Customer address."
       - name: email
         description: "Customer email address."
+        tests:
+          - not_null
 
   - name: stg_loans
     description: "Staging model for loans - cleaned and standardized."
     columns:
       - name: loan_id
         description: "Unique identifier for each loan."
+        tests:
+          - unique
+          - not_null
       - name: customer_id
         description: "Foreign key to customer."
       - name: amount
@@ -42,6 +52,9 @@ models:
     columns:
       - name: payment_id
         description: "Unique identifier for each payment."
+        tests:
+          - unique
+          - not_null
       - name: loan_id
         description: "Foreign key to loan."
       - name: payment_date
@@ -58,6 +71,9 @@ models:
     columns:
       - name: record_id
         description: "Unique identifier for each credit score record."
+        tests:
+          - unique
+          - not_null
       - name: customer_id
         description: "Foreign key to customer."
       - name: score_date
@@ -70,6 +86,9 @@ models:
     columns:
       - name: loan_id
         description: "Unique identifier for each loan."
+        tests:
+          - unique
+          - not_null
       - name: customer_id
         description: "Foreign key to customer."
       - name: amount
@@ -90,4 +109,49 @@ models:
         description: "Total interest paid."
       - name: last_payment_date
         description: "Date of most recent payment."
+
+  - name: fct_loans_analysis
+    description: "Fact table for loans analysis, combining loans, payments, customers, and latest credit scores."
+    columns:
+      - name: loan_id
+        description: "Unique identifier for each loan."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Foreign key to customer."
+      - name: first_name
+        description: "Customer first name."
+      - name: last_name
+        description: "Customer last name."
+      - name: signup_date
+        description: "Date when customer signed up."
+      - name: email
+        description: "Customer email."
+        tests:
+          - not_null
+      - name: latest_credit_score
+        description: "Customer's latest available credit score."
+      - name: original_loan_amount
+        description: "Original loan amount."
+      - name: interest_rate
+        description: "Loan interest rate."
+      - name: term_months
+        description: "Loan term in months."
+      - name: application_date
+        description: "Date of loan application."
+      - name: status
+        description: "Current status of the loan."
+      - name: total_amount_paid
+        description: "Total amount paid toward the loan."
+      - name: total_principal_paid
+        description: "Total principal paid."
+      - name: total_interest_paid
+        description: "Total interest paid."
+      - name: last_payment_date
+        description: "Date of most recent payment."
+      - name: loan_status_group
+        description: "High-level status of the loan (Paid Off, Active, Other)."
+
+
 
