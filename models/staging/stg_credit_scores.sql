@@ -1,0 +1,7 @@
+-- models/staging/stg_credit_scores.sql
+SELECT
+  RECORD_ID,
+  CUSTOMER_ID,
+  SCORE_DATE,
+  CREDIT_SCORE
+FROM LENDABLE_RAW.CREDIT_SCORES

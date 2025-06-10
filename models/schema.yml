@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Staging model for customers - cleaned and standardized."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer."
+      - name: first_name
+        description: "First name of the customer."
+      - name: last_name
+        description: "Last name of the customer."
+      - name: dob
+        description: "Date of birth."
+      - name: signup_date
+        description: "Date when the customer signed up."
+      - name: address
+        description: "Customer address."
+      - name: email
+        description: "Customer email address."
+
+  - name: stg_loans
+    description: "Staging model for loans - cleaned and standardized."
+    columns:
+      - name: loan_id
+        description: "Unique identifier for each loan."
+      - name: customer_id
+        description: "Foreign key to customer."
+      - name: amount
+        description: "Loan amount."
+      - name: interest_rate
+        description: "Interest rate of the loan."
+      - name: term_months
+        description: "Term of the loan in months."
+      - name: application_date
+        description: "Date when the loan application was made."
+      - name: status
+        description: "Current status of the loan."
+
+  - name: stg_payments
+    description: "Staging model for loan payments - cleaned and standardized."
+    columns:
+      - name: payment_id
+        description: "Unique identifier for each payment."
+      - name: loan_id
+        description: "Foreign key to loan."
+      - name: payment_date
+        description: "Date when payment was made."
+      - name: amount_paid
+        description: "Total amount paid in the payment."
+      - name: principal_paid
+        description: "Principal portion of the payment."
+      - name: interest_paid
+        description: "Interest portion of the payment."
+
+  - name: stg_credit_scores
+    description: "Staging model for customer credit scores - cleaned and standardized."
+    columns:
+      - name: record_id
+        description: "Unique identifier for each credit score record."
+      - name: customer_id
+        description: "Foreign key to customer."
+      - name: score_date
+        description: "Date of the credit score."
+      - name: credit_score
+        description: "Credit score value."
+
+  - name: int_loans_summary
+    description: "Intermediate model combining loans and payments to produce loan-level summary metrics."
+    columns:
+      - name: loan_id
+        description: "Unique identifier for each loan."
+      - name: customer_id
+        description: "Foreign key to customer."
+      - name: amount
+        description: "Loan amount."
+      - name: interest_rate
+        description: "Interest rate of the loan."
+      - name: term_months
+        description: "Loan term in months."
+      - name: application_date
+        description: "Loan application date."
+      - name: status
+        description: "Current status of the loan."
+      - name: total_amount_paid
+        description: "Total amount paid toward the loan."
+      - name: total_principal_paid
+        description: "Total principal paid."
+      - name: total_interest_paid
+        description: "Total interest paid."
+      - name: last_payment_date
+        description: "Date of most recent payment."
+
